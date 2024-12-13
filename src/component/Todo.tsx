@@ -2,13 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import todo_icon from "../asset/todo_icon.png";
 import TodoList from "./TodoList";
 
-interface newTodoProps {
+interface NewTodoProps {
   id: number;
   text: string;
   isComplete: boolean;
 }
 function Todo() {
-  const [todoList, setTodoList] = useState<newTodoProps[]>(() => {
+  const [todoList, setTodoList] = useState<NewTodoProps[]>(() => {
     const savedTodos = localStorage.getItem("todos");
     return savedTodos ? JSON.parse(savedTodos) : [];
   });
@@ -18,7 +18,7 @@ function Todo() {
     const inputText = inputRef.current?.value.trim();
     if (!inputText) return;
 
-    const newTodo: newTodoProps = {
+    const newTodo: NewTodoProps = {
       id: Date.now(),
       text: inputText,
       isComplete: false,
@@ -86,10 +86,10 @@ function Todo() {
 
       {/* Todo List */}
       <div>
-        {todoList.map((item, index) => {
+        {todoList.map((item) => {
           return (
             <TodoList
-              key={index}
+              key={item.id}
               text={item.text}
               id={item.id}
               isComplete={item.isComplete}
